@@ -3,7 +3,7 @@
 # Written by Shaoshuai Shi 
 # All Rights Reserved
 
-import _init_path
+#import _init_path
 import argparse
 import datetime
 import glob

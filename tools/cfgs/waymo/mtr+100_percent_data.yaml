@@ -2,7 +2,8 @@ DATA_CONFIG:
     DATASET: WaymoDataset
     OBJECT_TYPE: &object_type ['TYPE_VEHICLE', 'TYPE_PEDESTRIAN', 'TYPE_CYCLIST']
     
-    DATA_ROOT: 'data/waymo'
+    #DATA_ROOT: 'data/waymo'
+    DATA_ROOT: '/home/rdyro/Desktop/waymo_mtr'
     SPLIT_DIR: {
         'train': 'processed_scenarios_training', 
         'test': 'processed_scenarios_validation'
@@ -60,7 +61,8 @@ MODEL:
         NUM_FUTURE_FRAMES: 80
         NUM_MOTION_MODES: 6
 
-        INTENTION_POINTS_FILE: data/waymo/cluster_64_center_dict.pkl
+        #INTENTION_POINTS_FILE: data/waymo/cluster_64_center_dict.pkl
+        INTENTION_POINTS_FILE: /home/rdyro/Research/extreme_behavior/behavior_models/MTR/data/waymo/cluster_64_center_dict.pkl
 
         D_MODEL: 512
         NUM_DECODER_LAYERS: 6 
@@ -81,7 +83,7 @@ MODEL:
 
 
 OPTIMIZATION:
-    BATCH_SIZE_PER_GPU: 10
+    BATCH_SIZE_PER_GPU: 8
     NUM_EPOCHS: 30
 
     OPTIMIZER: AdamW

@@ -153,6 +153,7 @@ def train_model(model, optimizer, train_loader, optim_cfg,
                 logger=logger, logger_iter_interval=logger_iter_interval,
                 ckpt_save_dir=ckpt_save_dir, ckpt_save_time_interval=ckpt_save_time_interval
             )
+            #accumulated_iter = 4870
 
             # save trained model
             trained_epoch = cur_epoch + 1
@@ -180,7 +181,9 @@ def train_model(model, optimizer, train_loader, optim_cfg,
                     cfg, pure_model, test_loader, epoch_id=trained_epoch, logger=logger, dist_test=dist_train,
                     result_dir=eval_output_dir, save_to_file=False, logger_iter_interval=max(logger_iter_interval // 5, 1)
                 )
+                print("Done eval", flush=True)
                 if cfg.LOCAL_RANK == 0:
+                    print("Welcome from local rank 0", flush=True)
                     for key, val in tb_dict.items():
                         tb_log.add_scalar('eval/' + key, val, trained_epoch)
 
@@ -197,7 +200,6 @@ def train_model(model, optimizer, train_loader, optim_cfg,
                             with open(best_record_file, 'a') as f:
                                 pass
                             best_performance = -1
-
 
                         with open(best_record_file, 'a') as f:
                             print(f'epoch_{trained_epoch} mAP {tb_dict["mAP"]}', file=f)
